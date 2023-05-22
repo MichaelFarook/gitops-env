@@ -7,11 +7,11 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/MichaelFarook/plant-sec.git
+    repoURL: https://github.com/MichaelFarook/plant2.git
     targetRevision: HEAD
     path: helm 
   destination:
-    server: https://kubernetes.default.svc
+    server: {{ .Values.spec.destination.server }}
     namespace: plant-sec
   
   syncPolicy:

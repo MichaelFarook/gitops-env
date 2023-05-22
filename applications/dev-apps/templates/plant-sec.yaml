@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: plant-app-argocd
-  namespace: argocd 
+  name: plant-sec-app-argocd
+  namespace: argocd
 spec:
   project: default
 
   source:
-    repoURL: https://github.com/MichaelFarook/plant.git
+    repoURL: https://github.com/MichaelFarook/plant2.git
     targetRevision: HEAD
-    path: helm
+    path: helm 
   destination:
-    server: https://kubernetes.default.svc
-    namespace: plant
+    server: {{ .Values.spec.destination.server }}
+    namespace: plant-sec
   
   syncPolicy:
     syncOptions:

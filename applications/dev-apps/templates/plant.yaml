@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: plant-app-argocd
+  namespace: argocd 
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/MichaelFarook/plant.git
+    targetRevision: HEAD
+    path: helm
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: plant
+  
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+
+    automated:
+      selfHeal: true
+      prune: true
