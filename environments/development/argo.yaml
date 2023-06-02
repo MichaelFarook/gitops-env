@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: guestbook
+  name: app-env-{{ .Values.global.environment }}
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   labels:
-    name: guestbook
+    name: development
 spec:
   project: default
 
   source:
-    repoURL: https://github.com/argoproj/argocd-example-apps.git  
+    repoURL: https://github.com/MichaelFarook/plant-apps.git 
     targetRevision: HEAD 
-    path: guestbook
+    path: 
 
     chart: chart-name
     helm:
