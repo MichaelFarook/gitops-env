@@ -1,0 +1,11 @@
+global:
+  environment: development
+  region: us-east-1
+  aws_account: "123456789123"
+  
+applications:
+  plant_version:
+  plant_branch:
+  second_plant_version:
+  second_plant_branch:
+  
