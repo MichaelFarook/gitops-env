@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: front-app-{{ .Values.global.environment }}
+  namespace: argocd 
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/MichaelFarook/frontend.git
+    targetRevision: {{ .Values.applications.frontend_branch }}
+    path: helm/frontend
+    helm:
+      valueFiles:
+      - $values/environments/{{ .Values.global.environment }}/environment-values/frontend.yaml
+      parameters:
+      - name: "environment"
+        value: {{ .Values.global.environment }}
+      - name: "aws_account"
+        value: {{ .Values.global.aws_account }}
+      - name: "region"
+        value: {{ .Values.global.region }}
+      - name: "image.tag"
+        value: {{ .Values.applications.frontend_version }}
+  destination:
+    server: https://kubernetes.default.svc 
+    namespace: {{ .Values.global.environment }} 
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true

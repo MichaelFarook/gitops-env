@@ -4,8 +4,9 @@ global:
   aws_account: "123456789123"
   
 applications:
-  plant_version:
-  plant_branch:
-  second_plant_version:
-  second_plant_branch:
-  
+  frontend_version:
+  frontend_branch:
+  backend_version:
+  backend_branch:
+  bot_version:
+  bot_branch:
