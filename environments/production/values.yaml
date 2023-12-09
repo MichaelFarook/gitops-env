@@ -1,0 +1,12 @@
+global:
+  environment: production
+  region: us-east-1
+  aws_account: "123456789123"
+  
+applications:
+  frontend_version:
+  frontend_branch:
+  backend_version:
+  backend_branch:
+  bot_version:
+  bot_branch:

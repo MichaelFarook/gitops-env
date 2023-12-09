@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: plant-development
+  name: plant-apps-development
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -11,7 +11,13 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: applications/dev-apps
+    path: applications
     repoURL: https://github.com/MichaelFarook/plant-apps.git 
     targetRevision: HEAD
+    helm:
+        valueFiles:
+          - "../../environment/development/values.yaml"
+  project: default
+  syncPolicy:
+    automated: {}
     
