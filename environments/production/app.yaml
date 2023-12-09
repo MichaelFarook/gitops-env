@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: plant-apps-production
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: applications
+    repoURL: https://github.com/MichaelFarook/plant-apps.git 
+    targetRevision: HEAD
+    helm:
+        valueFiles:
+          - "../../environment/production/values.yaml"
+  project: default
+  syncPolicy:
+    automated: {}
+    
