@@ -1,19 +1,23 @@
+{{- range $app := .Values.argocdApplications -}}
+{{ if not .disable }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: front-app-{{ .Values.global.environment }}
+  name: {{ .name }}-{{ $.Values.global.environment }}
   namespace: argocd 
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
+  project: {{ $.Values.global.spec.project }} 
   source:
-    repoURL: https://github.com/MichaelFarook/frontend.git
+    repoURL: {{ $.Values.global.spec.source.repoURL }} 
     targetRevision: {{ .Values.applications.frontend_branch }}
-    path: helm/frontend
+    path: helm/{{ .name }}
     helm:
+    {{- if default $.Values.global.helmDefault .helm }}
       valueFiles:
       - $values/environments/{{ .Values.global.environment }}/environment-values/frontend.yaml
+    {{- end }}
       parameters:
       - name: "environment"
         value: {{ .Values.global.environment }}
@@ -32,3 +36,7 @@ spec:
     automated:
       selfHeal: true
       prune: true
+
+---
+{{- end }}
+{{- end }}
