@@ -1,0 +1,25 @@
+global:
+  environment: staging 
+  region: us-east-1
+  aws_account: "123456789123"
+
+global:
+  env: development
+  helmDefault: false
+  valuesFile: values.yaml
+  spec:
+    project: development
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: default
+    source:
+      repoURL: https://github.com/ranrubin/argocd-app-of-apps
+      targetRevision: HEAD
+
+argocdApplications:
+  frontend:
+    disableAutomated: false
+    disable: false
+    name: frontend 
+    namespace: frontend
+    version: "1244"
