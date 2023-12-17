@@ -16,10 +16,4 @@ This repository is structured as follows:
 Before getting started, make sure you have the following tools installed:
 
 - [kubectl]:(https://kubernetes.io/docs/tasks/tools/install-kubectl/): Kubernetes command-line tool.
-- [ArgoCD]:(https://argo-cd.readthedocs.io/en/stable/cli_installation/): Argocd.
-
-## Important thins
-
-- You need to use the ArgoCD newer than v2.5.0 
-
-
+- [ArgoCD]:(https://argo-cd.readthedocs.io/en/stable/cli_installation/): Argocd, need to use version >2.5.0
