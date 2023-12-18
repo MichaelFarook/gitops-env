@@ -1,11 +1,33 @@
 global:
-  environment: development
   region: us-east-1
   aws_account: "123456789123"
-  
-applications:
-  plant_version:
-  plant_branch:
-  second_plant_version:
-  second_plant_branch:
-  
+  env: staging 
+  helmDefault: false
+  valuesFile: values.yaml
+  spec:
+    project: staging 
+    destination:
+      namespace: staging 
+      server: https://kubernetes.default.svc
+    source:
+      targetRevision: HEAD
+
+argocdApplications:
+  frontend:
+    disableAutomated: false
+    disable: false
+    name: frontend 
+    namespace: frontend
+    version: "1244"
+    repoURL: "" 
+    helm: true
+    targetRevision: HEAD
+  backend:
+    disableAutomated: false
+    disable: false
+    name: backend 
+    namespace: backend 
+    version: "1244"
+    repoURL: "" 
+    helm: true
+    targetRevision: HEAD

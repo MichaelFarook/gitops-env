@@ -3,40 +3,39 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .name }}-{{ $.Values.global.environment }}
+  name: {{ .name }}-{{ $.Values.global.env }}
   namespace: argocd 
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: {{ $.Values.global.spec.project }} 
   source:
-    repoURL: {{ $.Values.global.spec.source.repoURL }} 
-    targetRevision: {{ .Values.applications.frontend_branch }}
+    repoURL: {{ $.Values.argocdApplications.repoURL }} 
+    targetRevision: {{ $.Values.argocdApplications.frontend_branch }}
     path: helm/{{ .name }}
     helm:
     {{- if default $.Values.global.helmDefault .helm }}
       valueFiles:
-      - $values/environments/{{ .Values.global.environment }}/environment-values/frontend.yaml
+      - $values/environments/{{ $.Values.global.env }}/environment-values/frontend.yaml
     {{- end }}
       parameters:
       - name: "environment"
-        value: {{ .Values.global.environment }}
+        value: {{ $.Values.global.env }}
       - name: "aws_account"
-        value: {{ .Values.global.aws_account }}
+        value: {{ $.Values.global.aws_account }}
       - name: "region"
-        value: {{ .Values.global.region }}
+        value: {{ $.Values.global.region }}
       - name: "image.tag"
-        value: {{ .Values.applications.frontend_version }}
+        value: {{ $.Values.argocdApplications.version }}
   destination:
-    server: https://kubernetes.default.svc 
-    namespace: {{ .Values.global.environment }} 
+    namespace: {{ default $.Values.global.spec.destination.namespace .namespace }} 
+    server: {{ $.Values.global.spec.destination.server }}
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
     automated:
       selfHeal: true
       prune: true
-
 ---
 {{- end }}
 {{- end }}
