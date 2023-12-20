@@ -3,6 +3,6 @@ global:
   region: us-east-1
   aws_account: '123456789123'
 applications:
-  frontend_version: prod-ec47dbeb12f73a20a2cc333eab2d80174979660a
+  frontend_version: prod-a62a34bafd99185d2efc7728ac55cd18b5a499ad
   backend_version: null
   bot_version: null
