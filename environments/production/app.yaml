@@ -12,11 +12,11 @@ spec:
   project: default
   source:
     path: applications
-    repoURL: https://github.com/MichaelFarook/plant-apps.git 
+    repoURL: https://github.com/MichaelFarook/gitops-env.git 
     targetRevision: HEAD
     helm:
         valueFiles:
-          - "../../environment/production/values.yaml"
+          - "/environments/production/values.yaml"
   project: default
   syncPolicy:
     automated: {}
