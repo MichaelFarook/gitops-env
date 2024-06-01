@@ -19,6 +19,6 @@ argocdApplications:
     name: frontend 
     namespace: frontend
     version: "1244"
-    repoURL: "" 
+    repoURL: "https://github.com/MichaelFarook/frontend.git" 
     helm: true
     targetRevision: HEAD

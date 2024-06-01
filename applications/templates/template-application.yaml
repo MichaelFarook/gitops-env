@@ -10,8 +10,8 @@ metadata:
 spec:
   project: {{ $.Values.global.spec.project }} 
   source:
-    repoURL: {{ $.Values.argocdApplications.repoURL }} 
-    targetRevision: {{ $.Values.argocdApplications.frontend_branch }}
+    repoURL: {{ $.Values.repoURL }} 
+    targetRevision: {{ $.Values.branch }}
     path: helm/{{ .name }}
     helm:
     {{- if default $.Values.global.helmDefault .helm }}
